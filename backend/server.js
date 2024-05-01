@@ -2,9 +2,13 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const blogRoutes = require("./routes/blogs");
+const cors = require("cors");
 
 //express app
 const app = express();
+
+//cors for coonecting frontend to backend
+app.use(cors());
 
 //middleware
 app.use(express.json());
