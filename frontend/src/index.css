@@ -108,10 +108,31 @@ textarea {
   cursor: pointer;
 }
 
+.del-confirmation {
+  margin-bottom: 10px;
+}
+
+.confirm-btn {
+  color: rgb(11, 192, 11);
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  color: rgb(231, 39, 39);
+  cursor: pointer;
+}
+
 div.error {
   color: red;
 }
 
 textarea.error {
   border: 1px solid red;
+}
+
+.created-time {
+  font-size: 0.9rem;
+  color: gray;
+  margin-bottom: 10px;
 }

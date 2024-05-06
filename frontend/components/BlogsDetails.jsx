@@ -1,11 +1,17 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useBlogsContext } from "../hooks/useBlogsContext";
 import { formatDistanceToNow } from "date-fns/formatDistanceToNow";
 
 const BlogsDetails = ({ blog }) => {
   const { dispatch } = useBlogsContext();
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleClick = async () => {
+    setShowConfirmation(true);
+  };
+
+  const handleDelete = async () => {
     const response = await fetch(
       `${import.meta.env.VITE_URL}/blogs/${blog._id}`,
       {
@@ -18,6 +24,8 @@ const BlogsDetails = ({ blog }) => {
     if (response.ok) {
       dispatch({ type: "DELETE_BLOGS", payload: data });
     }
+
+    setShowConfirmation(false);
   };
 
   return (
@@ -27,7 +35,21 @@ const BlogsDetails = ({ blog }) => {
       <div className="material-symbols-outlined del-btn" onClick={handleClick}>
         delete
       </div>
-      <p>
+      {showConfirmation && (
+        <div className="del-confirmation">
+          <p>Are you sure you want to delete this blog?</p>
+          <span className="confirm-btn" onClick={handleDelete}>
+            Yes
+          </span>
+          <span
+            className="cancel-btn"
+            onClick={() => setShowConfirmation(false)}
+          >
+            No
+          </span>
+        </div>
+      )}
+      <p className="created-time">
         Added{" "}
         {formatDistanceToNow(new Date(blog.createdAt), { addSuffix: true })}
       </p>
