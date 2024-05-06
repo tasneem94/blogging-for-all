@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import BlogsDetails from "../components/BlogsDetails";
+import { useBlogsContext } from "../hooks/useBlogsContext";
 const Home = () => {
-  const [blogs, setBlogs] = useState(null);
+  const { blogs, dispatch } = useBlogsContext();
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -9,11 +10,12 @@ const Home = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setBlogs(data);
+        dispatch({ type: "SET_BLOGS", payload: data });
       }
     };
     fetchBlogs();
-  }, []);
+  }, [dispatch]);
+
   return (
     <div className="home">
       <div>

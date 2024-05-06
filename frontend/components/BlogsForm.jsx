@@ -7,6 +7,7 @@ const BlogsForm = ({
   setBody,
   error,
   handleSubmit,
+  emptyFields,
 }) => {
   return (
     <form className="create" onSubmit={handleSubmit}>
@@ -15,7 +16,9 @@ const BlogsForm = ({
       <label>Blog Title:</label>
 
       <textarea
-        className="title-textarea"
+        className={
+          "title-textarea " + (emptyFields.includes("title") ? " error" : "")
+        }
         onChange={(e) => setTitle(e.target.value)}
         value={title}
         // className={emptyFields.includes("title") ? "error" : ""}
@@ -25,8 +28,9 @@ const BlogsForm = ({
       <label>Blog Snippet:</label>
 
       <textarea
-        className="snippet-textarea"
-        type="text"
+        className={
+          "snippet-textarea " + (emptyFields.includes("snippet") ? "error" : "")
+        }
         onChange={(e) => setSnippet(e.target.value)}
         value={snippet}
         // className={emptyFields.includes("snippet") ? "error" : ""}
@@ -36,7 +40,9 @@ const BlogsForm = ({
       <label>Blog body:</label>
 
       <textarea
-        className="body-textarea"
+        className={
+          "body-textarea " + (emptyFields.includes("body") ? "error" : "")
+        }
         onChange={(e) => setBody(e.target.value)}
         value={body}
         // className={emptyFields.includes("body") ? "error" : ""}
@@ -44,6 +50,7 @@ const BlogsForm = ({
       <br />
 
       <button className="add-blog-btn">Add Blog</button>
+
       {error && <div className="error">{error}</div>}
     </form>
   );

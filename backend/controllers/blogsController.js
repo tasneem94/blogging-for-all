@@ -28,7 +28,22 @@ const getSingleBlog = async (req, res) => {
 //POST (Create) a new Blog
 const createBlog = async (req, res) => {
   const { title, snippet, body } = req.body;
+  let emptyFields = [];
 
+  if (!title) {
+    emptyFields.push("title");
+  }
+  if (!snippet) {
+    emptyFields.push("snippet");
+  }
+  if (!body || body.length === 0) {
+    emptyFields.push("body");
+  }
+  if (emptyFields.length > 0) {
+    return res
+      .status(400)
+      .json({ error: "Please fill in all fields ", emptyFields });
+  }
   try {
     const blog = await Blog.create({ title, snippet, body });
     res.status(200).json(blog);
@@ -50,6 +65,8 @@ const deleteBlog = async (req, res) => {
   if (!blog) {
     return res.status(404).json({ error: "No such blog" });
   }
+
+  res.status(200).json(blog);
 };
 
 //UPDATE a Blog

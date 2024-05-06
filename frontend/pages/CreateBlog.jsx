@@ -1,13 +1,15 @@
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 import BlogsForm from "../components/BlogsForm";
-
+import { useBlogsContext } from "../hooks/useBlogsContext";
 const CreateBlog = () => {
+  const { dispatch } = useBlogsContext();
   const [title, setTitle] = useState("");
   const [snippet, setSnippet] = useState("");
   const [body, setBody] = useState("");
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,7 +20,8 @@ const CreateBlog = () => {
     // }
     const bodyParagraphs = body
       .split("\n")
-      .map((paragraph) => paragraph.trim());
+      .map((paragraph) => paragraph.trim())
+      .filter((paragraph) => paragraph !== "");
     const blog = { title, snippet, body: bodyParagraphs };
 
     const response = await fetch(`${import.meta.env.VITE_URL}/blogs/`, {
@@ -33,6 +36,10 @@ const CreateBlog = () => {
     if (!response.ok) {
       setError(data.error);
       setEmptyFields(data.emptyFields);
+      // console.log(data);
+      console.log(data.emptyFields);
+
+      console.log(emptyFields);
     }
     if (response.ok) {
       setError(null);
@@ -41,6 +48,9 @@ const CreateBlog = () => {
       setBody("");
       setEmptyFields([]);
 
+      navigate("/blogs");
+
+      dispatch({ type: "CREATE_BLOG", payload: data });
       console.log("new blog added:", data);
     }
   };
@@ -55,6 +65,7 @@ const CreateBlog = () => {
         setBody={setBody}
         error={error}
         handleSubmit={handleSubmit}
+        emptyFields={emptyFields}
       />
     </div>
   );
