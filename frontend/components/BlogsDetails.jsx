@@ -25,16 +25,21 @@ const BlogsDetails = ({ blog }) => {
       dispatch({ type: "DELETE_BLOGS", payload: data });
     }
 
-    setShowConfirmation(false);
+    // setShowConfirmation(false);
   };
 
   return (
     <div className="blogs-details">
       <h3 className="blog-title">{blog.title}</h3>
       <p className="blog-snippet">{blog.snippet}</p>
-      <div className="material-symbols-outlined del-btn" onClick={handleClick}>
-        delete
-      </div>
+      {!showConfirmation && (
+        <div
+          className="material-symbols-outlined del-btn"
+          onClick={handleClick}
+        >
+          delete
+        </div>
+      )}
       {showConfirmation && (
         <div className="del-confirmation">
           <p>Are you sure you want to delete this blog?</p>
@@ -45,7 +50,7 @@ const BlogsDetails = ({ blog }) => {
             className="cancel-btn"
             onClick={() => setShowConfirmation(false)}
           >
-            No
+            Cancel
           </span>
         </div>
       )}
