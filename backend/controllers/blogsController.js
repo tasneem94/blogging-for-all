@@ -1,6 +1,6 @@
 const Blog = require("../models/blogsModel");
 const mongoose = require("mongoose");
-
+const requireAuth = require("../middleware/requireAuth");
 //Get all blogs
 const getAllBlogs = async (req, res) => {
   const blogs = await Blog.find({}).sort({ createdAt: -1 });
@@ -10,7 +10,7 @@ const getAllBlogs = async (req, res) => {
 
 //Get a specific user's all blogs
 const getAllBlogsOfOneUser = async (req, res) => {
-  const user_id = req.user._id;
+  const user_id = req.user_id;
   const blogs = await Blog.find({ user_id }).sort({ createdAt: -1 });
 
   res.status(200).json(blogs);

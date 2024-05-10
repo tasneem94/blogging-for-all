@@ -14,6 +14,9 @@ const router = express.Router();
 //Get all blogs
 router.get("/", getAllBlogs);
 
+// //GET all blogs of a single user
+router.get("/my-blogs", getAllBlogsOfOneUser);
+
 //GET a single Blog
 router.get("/:id", getSingleBlog);
 
@@ -28,8 +31,5 @@ router.delete("/:id", deleteBlog);
 
 //UPDATE a Blog
 router.patch("/:id", updateBlog);
-
-// //GET all blogs of a single user
-router.get("/my-blogs", getAllBlogsOfOneUser);
 
 module.exports = router;
