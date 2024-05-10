@@ -66,7 +66,7 @@ const BlogsDetails = ({ blog }) => {
         Added{" "}
         {formatDistanceToNow(new Date(blog.createdAt), { addSuffix: true })}
       </p>
-      <Link to={`/blogs/${blog._id}`}>
+      <Link to={`/${blog._id}`}>
         <p className="read-blog">Click to read full blog</p>
       </Link>
     </div>
