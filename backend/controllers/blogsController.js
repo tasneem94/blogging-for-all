@@ -3,7 +3,15 @@ const mongoose = require("mongoose");
 
 //Get all blogs
 const getAllBlogs = async (req, res) => {
-  const blogs = await Blog.find({}).sort({ createdAt: 1 });
+  const blogs = await Blog.find({}).sort({ createdAt: -1 });
+
+  res.status(200).json(blogs);
+};
+
+//Get a specific user's all blogs
+const getAllBlogsOfOneUser = async (req, res) => {
+  const user_id = req.user._id;
+  const blogs = await Blog.find({ user_id }).sort({ createdAt: -1 });
 
   res.status(200).json(blogs);
 };
@@ -45,7 +53,8 @@ const createBlog = async (req, res) => {
       .json({ error: "Please fill in all fields ", emptyFields });
   }
   try {
-    const blog = await Blog.create({ title, snippet, body });
+    const user_id = req.user._id;
+    const blog = await Blog.create({ title, snippet, body, user_id });
     res.status(200).json(blog);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -86,6 +95,7 @@ const updateBlog = async (req, res) => {
 
 module.exports = {
   getAllBlogs,
+  getAllBlogsOfOneUser,
   getSingleBlog,
   createBlog,
   deleteBlog,

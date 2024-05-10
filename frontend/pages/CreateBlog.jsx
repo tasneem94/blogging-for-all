@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate hook
+import { useNavigate } from "react-router-dom";
 import BlogsForm from "../components/BlogsForm";
 import { useBlogsContext } from "../hooks/useBlogsContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 const CreateBlog = () => {
   const { dispatch } = useBlogsContext();
+  const { user } = useAuthContext();
   const [title, setTitle] = useState("");
   const [snippet, setSnippet] = useState("");
   const [body, setBody] = useState("");
@@ -14,10 +16,10 @@ const CreateBlog = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // if (!user) {
-    //   setError("You must be logged in");
-    //   return;
-    // }
+    if (!user) {
+      setError("You must be logged in");
+      return;
+    }
     const bodyParagraphs = body
       .split("\n")
       .map((paragraph) => paragraph.trim())
@@ -29,6 +31,7 @@ const CreateBlog = () => {
       body: JSON.stringify(blog),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
       },
     });
     const data = await response.json();

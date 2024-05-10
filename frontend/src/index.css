@@ -15,7 +15,7 @@ header {
   background-color: rgb(106, 221, 250);
 }
 .container {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 15px 25px;
   display: flex;
@@ -67,6 +67,7 @@ a {
 }
 
 .create {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -156,6 +157,53 @@ textarea.error {
   font-size: 0.9rem;
   color: gray;
   margin-bottom: 10px;
+}
+
+.signup,
+.login {
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signup h3,
+.login h3 {
+  margin: 50px 0 20px 0;
+}
+
+.signup input,
+.login input {
+  width: 350px;
+  height: 25px;
+  font-size: 1.1rem;
+  padding: 10px;
+}
+
+.signup button,
+.login button {
+  padding: 10px;
+  font-size: 1.2rem;
+  font-weight: bolder;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(130, 223, 246);
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.signup button:hover,
+.login button:hover {
+  background-color: rgba(130, 223, 246, 0.9);
+  transition: 0.1s ease;
+}
+
+.add-blog-link,
+.login-link,
+.signup-link,
+.container .user-name,
+.my-blogs-link {
+  margin-right: 10px;
 }
 
 @media (min-width: 1100px) {

@@ -21,6 +21,10 @@ userSchema.statics.signup = async function (email, password) {
   const exists = await this.findOne({ email });
 
   // validation
+  if (exists) {
+    throw Error("Email already in use");
+  }
+
   if (!email || !password) {
     throw Error("All fields must be filled");
   }
@@ -31,9 +35,6 @@ userSchema.statics.signup = async function (email, password) {
     throw Error(
       "Password not strong enough. Password should be of atleast 8 characters long and it should incude atleast one capital letter, one small letter, one number and one special character"
     );
-  }
-  if (exists) {
-    throw Error("Email already in use");
   }
 
   const salt = await bcrypt.genSalt(10);

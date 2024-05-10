@@ -2,12 +2,17 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useBlogsContext } from "../hooks/useBlogsContext";
 import { formatDistanceToNow } from "date-fns/formatDistanceToNow";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const BlogsDetails = ({ blog }) => {
   const { dispatch } = useBlogsContext();
+  const { user } = useAuthContext();
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleClick = async () => {
+    if (!user) {
+      return;
+    }
     setShowConfirmation(true);
   };
 
@@ -16,6 +21,9 @@ const BlogsDetails = ({ blog }) => {
       `${import.meta.env.VITE_URL}/blogs/${blog._id}`,
       {
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
       }
     );
 
