@@ -40,7 +40,7 @@ const BlogsDetails = ({ blog }) => {
     <div className="blogs-details">
       <h3 className="blog-title">{blog.title}</h3>
       <p className="blog-snippet">{blog.snippet}</p>
-      {!showConfirmation && (
+      {user && !showConfirmation && (
         <div
           className="material-symbols-outlined del-btn"
           onClick={handleClick}

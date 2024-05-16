@@ -206,6 +206,24 @@ textarea.error {
   margin-right: 10px;
 }
 
+button.log-out,
+.login-link,
+.signup-link {
+  padding: 2px;
+  background-color: rgb(106, 221, 250);
+  color: rgb(3, 70, 87);
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: bolder;
+}
+
+button.log-out:hover,
+.login-link:hover,
+.signup-link:hover {
+  color: rgba(4, 86, 107, 0.95);
+}
+
 @media (min-width: 1100px) {
   .blogs-details {
     max-width: 1000px;

@@ -33,6 +33,7 @@ const Navbar = () => {
                 Add a new blog
               </Link>
               <button
+                className="log-out"
                 onClick={() => {
                   logout();
                 }}
