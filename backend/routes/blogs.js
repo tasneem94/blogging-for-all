@@ -14,14 +14,14 @@ const router = express.Router();
 //Get all blogs
 router.get("/", getAllBlogs);
 
-// //GET all blogs of a single user
-router.get("/my-blogs", getAllBlogsOfOneUser);
-
 //GET a single Blog
-router.get("/:id", getSingleBlog);
+router.get("/userID/:id", getSingleBlog);
 
 // requireAuth for blogs route
 router.use(requireAuth);
+
+// //GET all blogs of a single user
+router.get("/my-blogs", getAllBlogsOfOneUser);
 
 //POST (Create) a new Blog
 router.post("/", createBlog);

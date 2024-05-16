@@ -10,7 +10,10 @@ const getAllBlogs = async (req, res) => {
 
 //Get a specific user's all blogs
 const getAllBlogsOfOneUser = async (req, res) => {
-  const user_id = req.user_id;
+  const user_id = req.user._id;
+
+  console.log("User ID:", req.user);
+
   const blogs = await Blog.find({ user_id }).sort({ createdAt: -1 });
 
   res.status(200).json(blogs);

@@ -6,7 +6,9 @@ const SingleBlogPage = () => {
   const { id } = useParams();
   useEffect(() => {
     const fetchSingleBlog = async () => {
-      const response = await fetch(`${import.meta.env.VITE_URL}/blogs/${id}`);
+      const response = await fetch(
+        `${import.meta.env.VITE_URL}/blogs/userID/${id}`
+      );
       const data = await response.json();
 
       if (response.ok) {
