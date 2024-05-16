@@ -4,7 +4,7 @@ import { useBlogsContext } from "../hooks/useBlogsContext";
 import { formatDistanceToNow } from "date-fns/formatDistanceToNow";
 import { useAuthContext } from "../hooks/useAuthContext";
 
-const BlogsDetails = ({ blog }) => {
+const BlogsDetails = ({ blog, myBlogsSelected }) => {
   const { dispatch } = useBlogsContext();
   const { user } = useAuthContext();
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -40,7 +40,7 @@ const BlogsDetails = ({ blog }) => {
     <div className="blogs-details">
       <h3 className="blog-title">{blog.title}</h3>
       <p className="blog-snippet">{blog.snippet}</p>
-      {user && !showConfirmation && (
+      {user && myBlogsSelected && !showConfirmation && (
         <div
           className="material-symbols-outlined del-btn"
           onClick={handleClick}

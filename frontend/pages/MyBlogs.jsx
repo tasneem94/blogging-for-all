@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import BlogsDetails from "../components/BlogsDetails";
 import { useBlogsContext } from "../hooks/useBlogsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 const MyBlogs = () => {
+  const [myBlogsSelected, setMyBlogsSelected] = useState(true);
   const { blogs, dispatch } = useBlogsContext();
   const { user } = useAuthContext();
 
@@ -31,7 +32,13 @@ const MyBlogs = () => {
     <div className="home">
       <div>
         {blogs &&
-          blogs.map((blog) => <BlogsDetails key={blog._id} blog={blog} />)}
+          blogs.map((blog) => (
+            <BlogsDetails
+              key={blog._id}
+              blog={blog}
+              myBlogsSelected={myBlogsSelected}
+            />
+          ))}
       </div>
     </div>
   );
